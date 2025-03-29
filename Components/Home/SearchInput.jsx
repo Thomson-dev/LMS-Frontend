@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, FlatList, Image } from "react-
 import { useFonts, Nunito_700Bold } from "@expo-google-fonts/nunito";
 import { AntDesign } from "@expo/vector-icons";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 
 export default function SearchInput({ homeScreen }) {
@@ -19,10 +20,12 @@ export default function SearchInput({ homeScreen }) {
     return null;
   }
 
+
+  const navigation = useNavigation();
   
 
   return (
-    <View>
+
       <View className="flex-row items-center  justify-between mx-4">
         <View className="flex-1 flex-row items-center bg-white rounded-md px-2 mr-2">
           <TextInput
@@ -35,13 +38,13 @@ export default function SearchInput({ homeScreen }) {
           />
           <TouchableOpacity
             className="w-9 h-9 bg-blue-600 justify-center items-center rounded-md"
-            // onPress={() => router.push("/(tabs)/search")}
+            onPress={() => navigation.navigate("SearchScreen")}
           >
             <AntDesign name="search1" size={20} color={"#fff"} />
           </TouchableOpacity>
         </View>
       </View>
      
-    </View>
+
   );
 }

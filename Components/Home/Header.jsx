@@ -1,24 +1,16 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { Raleway_700Bold } from "@expo-google-fonts/raleway";
 import { useFonts } from "expo-font";
-
 import { Feather } from "@expo/vector-icons";
-
-import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import useUser from "../../utils/useUser"; // Import the useUser hook
 
 export default function Header() {
-//   const [cartItems, setCartItems] = useState([]);
+  const cart = useSelector((state) => state.cart.cart);
+  const navigation = useNavigation();
 
-//   useEffect(() => {
-//     const subscription = async () => {
-//       const cart: any = await AsyncStorage.getItem("cart");
-//       setCartItems(JSON.parse(cart));
-//     };
-//     subscription();
-//   }, []);
-
-//   const { user } = useUser();
+  const { loading, user, error } = useUser(); // Use the useUser hook
 
   let [fontsLoaded, fontError] = useFonts({
     Raleway_700Bold,
@@ -28,12 +20,14 @@ export default function Header() {
   }
 
   return (
-    <View className = ' py-3' style={styles.container}>
+    <View className="py-3" style={styles.container}>
       <View style={styles.headerWrapper}>
-        <TouchableOpacity >
+        <TouchableOpacity>
           <Image
             source={
-               require("../../assets/User.png")
+              user?.avatar?.url
+                ? { uri: user.avatar.url }
+                : require("../../assets/User.png")
             }
             style={styles.image}
           />
@@ -43,20 +37,18 @@ export default function Header() {
             Hello,
           </Text>
           <Text style={[styles.text, { fontFamily: "Raleway_700Bold" }]}>
-            Naser
+            {user?.name || "User"}
           </Text>
         </View>
       </View>
       <TouchableOpacity
         style={styles.bellButton}
-        // onPress={() => router.push("/(routes)/cart")}
+        onPress={() => navigation.navigate("CartScreen")}
       >
         <View>
           <Feather name="shopping-bag" size={26} color={"black"} />
           <View style={styles.bellContainer}>
-            <Text style={{ color: "#fff", fontSize: 14 }}>
-              3
-            </Text>
+            <Text style={{ color: "#fff", fontSize: 14 }}>{cart.length}</Text>
           </View>
         </View>
       </TouchableOpacity>

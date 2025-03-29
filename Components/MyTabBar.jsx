@@ -1,18 +1,21 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
 import { AntDesign, Feather } from '@expo/vector-icons';
-import Search from '../Screens/Search';
 
 const TabBar = ({ state, descriptors, navigation }) => {
   const primaryColor = '#0000FF';
   const greyColor = '#737373';
 
-  const icons = {
-    Home: 'home',
-    Profile: 'user',
-    Courses: 'book',
-    Search: 'search',
+  // Update mapping keys to match your route names
+  const tabIcons = {
+    HomeScreen: { icon: 'home', lib: AntDesign },
+    CourseScreen: { icon: 'book', lib: Feather },
+    SearchScreen: { icon: 'search', lib: Feather },
+    ProfileScreen: { icon: 'user', lib: Feather },
   };
+
+  // Fallback icon if mapping is missing.
+  const defaultIcon = { icon: 'alert-circle', lib: Feather };
 
   return (
     <View style={styles.tabbar}>
@@ -46,6 +49,10 @@ const TabBar = ({ state, descriptors, navigation }) => {
           });
         };
 
+
+        // Extract icon config with fallback.
+        const { icon, lib: IconComponent } = tabIcons[route.name] || defaultIcon;
+
         return (
           <TouchableOpacity
             key={index}
@@ -57,14 +64,14 @@ const TabBar = ({ state, descriptors, navigation }) => {
             onLongPress={onLongPress}
             style={styles.tab}
           >
-            <Feather
-              name={icons[route.name]}
-              size={24}
-              color={isFocused ? primaryColor : greyColor}
-            />
-            {/* <Text style={{ color: isFocused ? primaryColor : greyColor }}>
-              {label}
-            </Text> */}
+            {IconComponent && (
+              <IconComponent
+                name={icon}
+                size={24}
+                color={isFocused ? primaryColor : greyColor}
+              />
+            )}
+           
           </TouchableOpacity>
         );
       })}
@@ -74,7 +81,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
 
 const styles = StyleSheet.create({
   tabbar: {
-    position: 'absolute', 
+    position: 'absolute',
     bottom: 25,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -85,10 +92,10 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderCurve: 'continuous',
     shadowColor: 'black',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 10,
-    shadowOpacity: 0.1
-},
+    shadowOpacity: 0.1,
+  },
   tab: {
     flex: 1,
     alignItems: 'center',

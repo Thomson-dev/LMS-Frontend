@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.thomson200.LMS"
     },
     "web": {
       "bundler": "metro",
@@ -27,6 +28,11 @@
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "0a57ecbc-c961-4e72-93cb-15f41ee7d1e2"
+      }
+    }
   }
 }

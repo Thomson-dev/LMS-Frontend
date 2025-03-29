@@ -46,10 +46,12 @@ const RegisterScreen = () => {
     password: "",
   });
 
+
+
   const handleRegister = async () => {
     setIsLoading(true);
     await axios
-      .post(`${SERVER_URI}/api/registration`, {
+      .post(`https://lms-server-oqfi.onrender.com/api/registration`, {
         name: userInfo.name,
         email: userInfo.email,
         password: userInfo.password,
@@ -151,7 +153,7 @@ const RegisterScreen = () => {
                   onPress={() => {
                     setSecureEntry((prev) => !prev);
                   }}
-                >
+                > 
                   <Ionicons
                     name={secureEntry ? "eye-off" : "eye"}
                     size={20}

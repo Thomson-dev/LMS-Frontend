@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Courses = () => {
+const QuestionCard = () => {
   return (
     <View>
-      <Text>Courses</Text>
+      <Text>QuestionCard</Text>
     </View>
   )
 }
 
-export default Courses
+export default QuestionCard
 
 const styles = StyleSheet.create({})

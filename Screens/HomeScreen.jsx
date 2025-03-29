@@ -1,20 +1,26 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Header from '../Components/Home/Header'
-import SearchInput from '../Components/Home/SearchInput'
-import HomeBannerSlider from '../Components/Home/HomeBannerSlide'
+import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import Header from "../Components/Home/Header";
 
+import HomeBannerSlider from "../Components/Home/HomeBannerSlide";
+import GetAllCourse from "../Components/Home/GetAllCourse";
+import SearchInput from "./SearchScreen";
 
 const HomeScreen = () => {
   return (
-    <View className = 'flex-1'  >
-     <Header/>
-     <SearchInput/>
-     <HomeBannerSlider/>
-    </View>
-  )
-}
+    <ScrollView className="mb-24" contentContainerStyle={{ flexGrow: 1 }}>
+      <StatusBar
+        barStyle="light-content" // Set text color to light
+        backgroundColor="black" // Set background color
+      />
+      <Header /> 
+       {/* <SearchInput  />  */}
+       <HomeBannerSlider />
+      <GetAllCourse /> 
+    </ScrollView>
+  );
+};
 
-export default HomeScreen
+export default HomeScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

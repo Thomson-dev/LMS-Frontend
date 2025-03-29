@@ -16,9 +16,9 @@ const bannerData = [
 
 export default function HomeBannerSlide() {
   return (
-    <View className = 'mt-4 flex-1 mx-5' >
+    <View className = 'mt-4 h-52 mx-5' >
       <Swiper
-        style={styles.wrapper}
+     
         showsButtons={false}
         autoplay={true}
         autoplayTimeout={5}
