@@ -58,7 +58,7 @@ const AuthScreen = () => {
             style={{ fontFamily: "Rubik_bold" }}
             className="text-xl text-center"
           >
-            Join Cybex IT Group to Kick Start
+            Join YemenEdu Group to Kick Start
           </Text>
           <Text
             style={{ fontFamily: "Rubik_bold" }}

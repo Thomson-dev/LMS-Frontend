@@ -83,7 +83,7 @@ const onboardingPages = [
   {
     backgroundColor: "#ffffff",
     image: <Image style={styles.image} source={require("../assets/Frame1.png")} />,
-    title: "Welcome to Cybex IT Group where learning meets innovation!",
+    title: "Welcome to YemenEdu where learning meets innovation!",
     subtitle: "Empowering your journey through cutting-edge IT education and expertise",
   },
   {

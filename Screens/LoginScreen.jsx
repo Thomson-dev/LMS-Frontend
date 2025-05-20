@@ -44,21 +44,30 @@ const LoginScreen = () => {
     password: "",
   });
 
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const accessToken = await AsyncStorage.getItem("access_token");
-        if (accessToken) {
+useEffect(() => {
+  const checkLoginStatus = async () => {
+    try {
+      const accessToken = await AsyncStorage.getItem("access_token");
+      if (accessToken) {
+        // Decode the token to check expiry
+        const decoded = jwtDecode(accessToken);
+        const currentTime = Date.now() / 1000; // in seconds
+        if (decoded.exp && decoded.exp > currentTime) {
           navigation.replace("Home");
         } else {
-          console.log("No token found");
+          // Token expired, remove it
+          await AsyncStorage.removeItem("access_token");
+          console.log("Token expired");
         }
-      } catch (err) {
-        console.log("Error fetching token:", err);
+      } else {
+        console.log("No token found");
       }
-    };
-    checkLoginStatus();
-  }, []);
+    } catch (err) {
+      console.log("Error fetching token:", err);
+    }
+  };
+  checkLoginStatus();
+}, []);
 
   const handleLoginPress = () => {
     navigation.navigate("LoginScreen");
@@ -77,7 +86,7 @@ const LoginScreen = () => {
       })
       .then(async (res) => {
         await AsyncStorage.setItem("access_token", res.data.accessToken);
-        await AsyncStorage.setItem("refresh_token", res.data.refreshToken);
+       
         
         setUserInfo({
           email: "",
